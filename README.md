@@ -114,11 +114,39 @@ conda activate peft
 
 ### 安装 Python 依赖软件包
 
-完整 Python 依赖软件包见[requirements.txt](requirements.txt)。
+完整 Python 依赖见 [requirements.txt](requirements.txt)。
+
+**使用 pip（与课程一致）**
 
 ```shell
 pip install -r requirements.txt
 ```
+
+**使用 uv（安装更快，推荐）**
+
+先安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，然后在项目根目录执行：
+
+```shell
+uv venv --python 3.10
+source .venv/bin/activate
+# Windows（PowerShell）：.venv\Scripts\Activate.ps1
+uv pip install -r requirements.txt
+```
+
+**macOS 与 Linux GPU 服务器的区别**
+
+`autoawq`、`auto-gptq`、`bitsandbytes` 等量化相关包**仅有 Linux x86_64 或 Windows 的预编译 wheel**，在 **Apple Silicon（arm64）macOS** 上无法从 PyPI 直接安装（会出现 “no wheels with a matching platform tag” 一类错误）。因此：
+
+- **Mac 本地**：只需安装 [requirements.txt](requirements.txt)，可运行大部分课程代码；**AWQ / GPTQ / bitsandbytes 相关笔记本**需在带 **NVIDIA GPU 的 Linux** 环境（如云 GPU）中完成。
+- **Ubuntu + NVIDIA GPU**（与课程一致）：在安装完 `requirements.txt` 后，再安装 GPU 量化补充依赖：
+
+```shell
+pip install -r requirements-linux-gpu.txt
+# 或使用 uv：
+uv pip install -r requirements-linux-gpu.txt
+```
+
+补充依赖列表见 [requirements-linux-gpu.txt](requirements-linux-gpu.txt)。
 
 
 ### 安装和配置 Jupyter Lab

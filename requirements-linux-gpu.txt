@@ -1,0 +1,5 @@
+# 仅在 Linux + NVIDIA GPU 环境下安装（与课程量化/LoRA 笔记本配套）
+# macOS / Windows 本地开发请使用 requirements.txt，勿强行安装本文件
+autoawq==0.2.2
+auto-gptq==0.6.0
+bitsandbytes==0.41.3.post2

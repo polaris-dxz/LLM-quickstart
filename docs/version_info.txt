@@ -1,3 +1,4 @@
+# 主依赖见 ../requirements.txt；Linux+NVIDIA 量化补充见 ../requirements-linux-gpu.txt
 torch>=2.1.2==2.3.0.dev20240116+cu121
 transformers==4.37.2
 ffmpeg==1.4

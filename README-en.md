@@ -28,12 +28,39 @@ For detailed installation instructions, please refer to [Documentation](docs/INS
 
 ### Installing Python Dependencies
 
-Please use the `requirements.txt` file to install Python dependencies:
+Use [requirements.txt](requirements.txt) for the main dependency set.
+
+**pip**
 
 ```shell
 pip install -r requirements.txt
 ```
-The currently supported list of software versions for project operation is as follows, see [Version Comparison Document](docs/version_info.txt) for details:
+
+**uv (faster resolver/installer, recommended)**
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then from the repo root:
+
+```shell
+uv venv --python 3.10
+source .venv/bin/activate
+# Windows (PowerShell): .venv\Scripts\Activate.ps1
+uv pip install -r requirements.txt
+```
+
+**macOS vs Linux GPU**
+
+Packages such as `autoawq`, `auto-gptq`, and `bitsandbytes` ship **pre-built wheels only for Linux x86_64 or Windows**, not for **Apple Silicon macOS**. Installing the old single `requirements.txt` on arm64 Mac can fail with errors like “no wheels with a matching platform tag”.
+
+- **On Mac**: install [requirements.txt](requirements.txt) only; most notebooks run; AWQ / GPTQ / bitsandbytes notebooks need a **Linux machine with an NVIDIA GPU** (e.g. cloud GPU).
+- **On Ubuntu + NVIDIA GPU**: after `requirements.txt`, add:
+
+```shell
+pip install -r requirements-linux-gpu.txt
+# or: uv pip install -r requirements-linux-gpu.txt
+```
+
+See [requirements-linux-gpu.txt](requirements-linux-gpu.txt).
+The currently supported list of software versions for project operation is as follows, see [Version Comparison Document](docs/version_info.txt) for details. GPU-only quant packages (`autoawq`, `auto-gptq`, `bitsandbytes`) are listed in [requirements-linux-gpu.txt](requirements-linux-gpu.txt).
 
 ```
 torch>=2.1.2==2.3.0.dev20240116+cu121
@@ -47,10 +74,7 @@ scikit-learn==1.3.2
 pandas==2.1.1
 peft==0.7.2.dev0
 accelerate==0.26.1
-autoawq==0.2.2
 optimum==1.17.0.dev0
-auto-gptq==0.6.0
-bitsandbytes>0.39.0==0.41.3.post2
 jiwer==3.0.3
 soundfile>=0.12.1==0.12.1
 librosa==0.10.1
