@@ -15,7 +15,9 @@ soundfile==0.12.1
 librosa==0.10.1
 gradio==4.13.0
 trl==0.8.1
-openai==1.30.1
+# 1.30.x 与 httpx 0.28+ 不兼容（Client 不再接受 proxies）；升级到 1.109.x 与新版 httpx 共存
+openai==1.109.1
+python-dotenv==1.0.1
 langchain==0.2.0
 langchain-openai==0.1.7
 langchain-core==0.2.1
